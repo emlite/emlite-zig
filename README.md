@@ -40,15 +40,13 @@ In your build.zig:
     exe.root_module.addImport("emlite", emlite_dep.module("emlite"));
     exe.import_memory = true;
     exe.export_memory = true;
+    exe.export_table = true;
+    exe.rdynamic = true;
 ```
 
-To use build.zig.zon, currently no packages are distributed. You can clone the github repo, and point to the zig/emlite subdirectory:
-```zig
-    .dependencies = .{
-        .emlite = .{
-            .path = "path/to/emlite/zig/emlite/",
-        },
-    },
+You can probably use zig fetch to add this repo as a dependency:
+```bash
+zig fetch --save=emlite https://github.com/emlite/emlite-zig/archive/refs/heads/main.zip
 ```
 
 In your web stack:
