@@ -5,6 +5,12 @@ pub export fn emlite_target() i32 {
     return 1027;
 }
 
+pub export fn emlite_malloc(sz: usize) ?*anyopaque {
+    const allocator = std.heap.page_allocator;
+    const memory = allocator.alloc(u8, sz) catch unreachable;
+    return memory.ptr;
+}
+
 pub const Handle = u32;
 
 const EmlitePrefHandles = enum(i32) {
