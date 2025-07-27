@@ -2,7 +2,7 @@ const std = @import("std");
 const meta = std.meta;
 
 pub export fn emlite_target() i32 {
-    return 1029;
+    return 1030;
 }
 
 pub export fn emlite_malloc(sz: usize) ?*anyopaque {
