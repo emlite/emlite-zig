@@ -105,12 +105,13 @@ pub const Val = struct {
                         const full_len = child_info.array.len;
                         const slice = v.*[0 .. full_len - 1];
                         return fromStr(slice);
+                    } else {
+                        return Val.fromHandle(v.*.toHandle());
                     }
-                    @compileError("Val.from: unsupported pointer type " ++ @typeName(T));
                 },
-                else => @compileError("Val.from: unsupported pointer type " ++ @typeName(T)),
+                else => Val.fromHandle(v.*.toHandle()),
             },
-            else => @compileError("Val.from: unsupported type " ++ @typeName(T)),
+            else => Val.fromHandle(v.toHandle()),
         };
     }
 
@@ -175,7 +176,7 @@ pub const Val = struct {
                 const zstr = emlite_val_get_value_string(self.handle);
                 return zstr;
             },
-            else => @compileError("Val.as: unsupported target type " ++ @typeName(T)),
+            else => T.fromHandle(self.handle),
         };
     }
 
